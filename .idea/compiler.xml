@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <bytecodeTargetLevel target="17">
+      <module name="Tic-Tac-Toe-edu.Problems-Bus_tour.main" target="13" />
+      <module name="Tic-Tac-Toe-edu.Problems-Check_if_an_array_contains_two_numbers.main" target="13" />
+      <module name="Tic-Tac-Toe-edu.Problems-Check_if_an_array_is_sorted_ascending.main" target="13" />
+      <module name="Tic-Tac-Toe-edu.Problems-Count_how_many_times_a_number_occurs.main" target="13" />
+      <module name="Tic-Tac-Toe-edu.Problems-Does_an_array_contain_N.main" target="13" />
+      <module name="Tic-Tac-Toe-edu.Problems-Fill_the_matrix_by_numbers.main" target="13" />
+      <module name="Tic-Tac-Toe-edu.Problems-Generating_passwords.main" target="13" />
+      <module name="Tic-Tac-Toe-edu.Problems-Generating_passwords__1_.main" target="13" />
+      <module name="Tic-Tac-Toe-edu.Problems-Individual_taxes.main" target="13" />
+      <module name="Tic-Tac-Toe-edu.Problems-Move_the_first_N_characters.main" target="13" />
+      <module name="Tic-Tac-Toe-edu.Problems-Palindrome.main" target="13" />
+      <module name="Tic-Tac-Toe-edu.Problems-Parse_url.main" target="13" />
+      <module name="Tic-Tac-Toe-edu.Problems-Right_Rotation.main" target="13" />
+      <module name="Tic-Tac-Toe-edu.Problems-Swap_the_columns.main" target="13" />
+      <module name="Tic-Tac-Toe-edu.Problems-The_longest_ascending_sequence.main" target="13" />
+      <module name="Tic-Tac-Toe-edu.Problems-The_maximum_product_of_adjacent_elements.main" target="13" />
+      <module name="Tic-Tac-Toe-edu.Problems-The_percentage_of_G_and_C_characters.main" target="13" />
+      <module name="Tic-Tac-Toe-edu.Problems-The_star_figure.main" target="13" />
+      <module name="Tic-Tac-Toe-edu.Problems-The_sum_of_array_elements.main" target="13" />
+      <module name="Tic-Tac-Toe-edu.Problems-Two_numbers_never_occur_next_to_each_other.main" target="13" />
+      <module name="Tic-Tac-Toe-edu.Tic-Tac-Toe-task-build-classes-java.main" target="13" />
+      <module name="Tic-Tac-Toe-edu.Tic-Tac-Toe-task-build-generated-sources-annotationProcessor-java.main" target="13" />
+      <module name="Tic-Tac-Toe-edu.Tic-Tac-Toe-task-build-generated-sources-headers-java.main" target="13" />
+      <module name="Tic-Tac-Toe-edu.Tic-Tac-Toe-task-build-reports-tests.main" target="13" />
+      <module name="Tic-Tac-Toe-edu.Tic-Tac-Toe-task-build-test-results.main" target="13" />
+      <module name="Tic-Tac-Toe-edu.Tic-Tac-Toe-task-build-tmp.main" target="13" />
+      <module name="Tic-Tac-Toe-edu.Tic-Tac-Toe-task-out.main" target="13" />
+      <module name="Tic-Tac-Toe-edu.Tic-Tac-Toe-task.main" target="13" />
+      <module name="Tic-Tac-Toe-edu.util.main" target="13" />
+      <module name="TicTacToe-EDU.Problems-Bus_tour.main" target="11" />
+      <module name="TicTacToe-EDU.Problems-Check_if_an_array_contains_two_numbers.main" target="11" />
+      <module name="TicTacToe-EDU.Problems-Check_if_an_array_is_sorted_ascending.main" target="11" />
+      <module name="TicTacToe-EDU.Problems-Count_how_many_times_a_number_occurs.main" target="11" />
+      <module name="TicTacToe-EDU.Problems-Does_an_array_contain_N.main" target="11" />
+      <module name="TicTacToe-EDU.Problems-Fill_the_matrix_by_numbers.main" target="11" />
+      <module name="TicTacToe-EDU.Problems-Generating_passwords.main" target="11" />
+      <module name="TicTacToe-EDU.Problems-Generating_passwords__1_.main" target="11" />
+      <module name="TicTacToe-EDU.Problems-Individual_taxes.main" target="11" />
+      <module name="TicTacToe-EDU.Problems-Move_the_first_N_characters.main" target="11" />
+      <module name="TicTacToe-EDU.Problems-Palindrome.main" target="11" />
+      <module name="TicTacToe-EDU.Problems-Parse_url.main" target="11" />
+      <module name="TicTacToe-EDU.Problems-Right_Rotation.main" target="11" />
+      <module name="TicTacToe-EDU.Problems-Swap_the_columns.main" target="11" />
+      <module name="TicTacToe-EDU.Problems-The_longest_ascending_sequence.main" target="11" />
+      <module name="TicTacToe-EDU.Problems-The_maximum_product_of_adjacent_elements.main" target="11" />
+      <module name="TicTacToe-EDU.Problems-The_percentage_of_G_and_C_characters.main" target="11" />
+      <module name="TicTacToe-EDU.Problems-The_star_figure.main" target="11" />
+      <module name="TicTacToe-EDU.Problems-The_sum_of_array_elements.main" target="11" />
+      <module name="TicTacToe-EDU.Problems-Two_numbers_never_occur_next_to_each_other.main" target="11" />
+      <module name="TicTacToe-EDU.Simple_Tic-Tac-Toe-task-build-classes-java.main" target="11" />
+      <module name="TicTacToe-EDU.Simple_Tic-Tac-Toe-task-build-generated-sources-annotationProcessor-java.main" target="11" />
+      <module name="TicTacToe-EDU.Simple_Tic-Tac-Toe-task-build-generated-sources-headers-java.main" target="11" />
+      <module name="TicTacToe-EDU.Simple_Tic-Tac-Toe-task-build-reports-tests.main" target="11" />
+      <module name="TicTacToe-EDU.Simple_Tic-Tac-Toe-task-build-test-results.main" target="11" />
+      <module name="TicTacToe-EDU.Simple_Tic-Tac-Toe-task-build-tmp.main" target="11" />
+      <module name="TicTacToe-EDU.Simple_Tic-Tac-Toe-task-out.main" target="11" />
+      <module name="TicTacToe-EDU.Simple_Tic-Tac-Toe-task.main" target="11" />
+      <module name="TicTacToe-EDU.util.main" target="11" />
+    </bytecodeTargetLevel>
+  </component>
+</project>
