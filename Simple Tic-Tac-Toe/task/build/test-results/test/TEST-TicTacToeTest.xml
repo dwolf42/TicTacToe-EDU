@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="TicTacToeTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-08-04T20:52:10" hostname="DESKTOP-F3UHT3G" time="0.119">
+  <properties/>
+  <testcase name="start" classname="TicTacToeTest" time="0.119"/>
+  <system-out><![CDATA[?[1;31m
+Start test 1?[0m
+> XXXOO__O_
+---------
+| X X X |
+| O O _ |
+| _ O _ |
+---------
+X wins
+?[1;31m
+Start test 2?[0m
+> XOXOXOXXO
+---------
+| X O X |
+| O X O |
+| X X O |
+---------
+X wins
+?[1;31m
+Start test 3?[0m
+> XOOOXOXXO
+---------
+| X O O |
+| O X O |
+| X X O |
+---------
+O wins
+?[1;31m
+Start test 4?[0m
+> XOXOOXXXO
+---------
+| X O X |
+| O O X |
+| X X O |
+---------
+Draw
+?[1;31m
+Start test 5?[0m
+> XO_OOX_X_
+---------
+| X O _ |
+| O O X |
+| _ X _ |
+---------
+Game not finished
+?[1;31m
+Start test 6?[0m
+> XO_XO_XOX
+---------
+| X O _ |
+| X O _ |
+| X O X |
+---------
+Impossible
+?[1;31m
+Start test 7?[0m
+> _O_X__X_X
+---------
+| _ O _ |
+| X _ _ |
+| X _ X |
+---------
+Impossible
+?[1;31m
+Start test 8?[0m
+> _OOOO_X_X
+---------
+| _ O O |
+| O O _ |
+| X _ X |
+---------
+Impossible
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
