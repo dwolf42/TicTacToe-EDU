@@ -1,186 +1,263 @@
-// My first solution
-
 package tictactoe;
 
 import java.util.Scanner;
 
 public class Main {
+
+    static char currentPlayer = 'X';
+
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
 
-        String[] partsOfInput = scanner.nextLine().toUpperCase().split("");
-
-        scanner.close();
-
-        // That's the way to paradise - oh wait, it's just the game board - lol
-        String[][] board = {{" ", " ", " "},
-                            {" ", " ", " "},
-                            {" ", " ", " "}
+        char[][] board = {
+                // 1,1   1,2  1,3
+                // 0,0   0,1  0,2
+                {' ', ' ', ' '},
+                // 2,1   2,2  2,3
+                // 1,0   1,1  1,2
+                {' ', ' ', ' '},
+                // 3,1   3,2  3,3
+                // 2,0   2,1  2,2
+                {' ', ' ', ' '},
         };
 
-        // indexOnPartOfInput; is to count which index (token) of partsOfInput[] should be put into
-        // which position of the board[][]
-        int indexOnPartOfInput = 0;
-        for (int i = 0; i < board.length; i++) {
-            for (int j = 0; j < board[1].length; j++) {
-                board[i][j] = partsOfInput[indexOnPartOfInput];
-                indexOnPartOfInput++;
-            }
+        gameLoop(board);
+    }
+
+    public static void gameLoop(char[][] board) {
+        char winner = checkWinconditions(board);
+
+        printArrayBoard(board);
+
+        if (winner == 'd') {
+            printWinner("Draw");
+            return;
         }
+        if (winner == 'X') {
+            printWinner("X wins");
+            return;
+        }
+        if (winner == 'O') {
+            printWinner("O wins");
+            return;
+        }
+
+        int[] validatedCoordinates = getValidCoordinates(board);
+        // Coordinates provided by the user start counting form 1-3,
+        // while the counting in arrays start fom 0-2.
+        // So, the position on the board where the user wants to place their symbol has to be
+        // the user's entered coordinate - 1, like: input = 1 1 -> position = 0 0 on the board.
+        // That's why I subtract 1 in the final coordinates here.
+        board[validatedCoordinates[0] - 1][validatedCoordinates[1] - 1] = currentPlayer;
+
+        changePlayer();
+
+        gameLoop(board);
+    }
+
+    public static void printArrayBoard(char[][] board) {
+        String horizontalBorder = "---------";
+        String verticalBar = "|";
+
+        System.out.println(horizontalBorder);
+        for (char[] ch : board) {
+            System.out.print(verticalBar + " ");
+            for (char cha : ch) {
+                System.out.print(cha + " ");
+            }
+            System.out.println(verticalBar);
+        }
+        System.out.println(horizontalBorder);
+    }
+
+    // User's input of coordinates is a string that will be checked if it contains
+    // numbers and then the numbers will be translated to integers.
+    // Keeps asking for the correct input.
+    public static int[] getValidCoordinates(char[][] board) {
+        Scanner scanner = new Scanner(System.in);
+        // Only positive numbers are allowed.
+        String pattern = "([-+])?\\d+";
+        printTurnMessage();
+        String[] coordinates = scanner.nextLine().split(" ");
+
+        // Loops as long as the input doesn't match the pattern of only positive integers.
+        if (!coordinates[0].matches(pattern) || !coordinates[1].matches(pattern)) {
+            System.out.println("You should enter numbers!");
+            return getValidCoordinates(board);
+        }
+
+        // Translates string numbers to integers.
+        int[] numCoordinates = {Integer.parseInt(coordinates[0]), Integer.parseInt(coordinates[1])};
+
+        // In case the user enters coordinates bigger than 3 or smaller than 0 an error will be shown and
+        // the method will be reset and restarted.
+        if (numCoordinates[0] > 3 || numCoordinates[0] < 1 || numCoordinates[1] > 3 || numCoordinates[1] < 1) {
+            System.out.println("Coordinates should be from 1 to 3!");
+            return getValidCoordinates(board);
+        }
+
+        // When user input is in range and a number, this checks whether it's valid or not.
+        if (!isValidTurn(board, numCoordinates)) {
+            return getValidCoordinates(board);
+        }
+
+        return numCoordinates;
+    }
+
+    // Coordinates provided by the user start counting from 1-3,
+    // while the counting in arrays start from 0-2.
+    // So the position on the board where the user wants to place their symbol has to be
+    // the user's entered coordinate - 1, like: input = 1 1 -> position = 0 0 on the board.
+    // That's why I subtract 1 in the if-condition here.
+    public static boolean isValidTurn(char[][] board, int[] getValidCoordinates) {
+        if (board[getValidCoordinates[0] - 1][getValidCoordinates[1] - 1] == ' ') {
+            return true;
+        } else {
+            System.out.println("This cell is occupied! Choose another one!");
+            return false;
+        }
+    }
+
+    public static void printTurnMessage() {
+        System.out.println("Enter the coordinates:");
+    }
+
+    public static void changePlayer() {
+        switch (currentPlayer) {
+            case 'X':
+                currentPlayer = 'O';
+                break;
+            default:
+                currentPlayer = 'X';
+                break;
+        }
+    }
+
+    public static char checkWinconditions(char[][] board) {
+        /* Iterate through board to determine:
+
+         * -> O wins: three O's in a row
+         * -> X wins: three X's in a row
+         * -> Draw: neither side wins, no more empty cells
+         * */
+
+        // --- Win conditions ---
 
         // >>> X win conditions <<<
 
         // True if the indexes that are building the diagonal line from top left to bottom right
         // or from top right to bottom left are "X"
-        boolean xWinLeftDiagonal = board[0][0].equals("X") &&
-                board[1][1].equals("X") &&
-                board[2][2].equals("X");
 
-        boolean xWinRightDiagonal = board[0][2].equals("X") &&
-                board[1][1].equals("X") &&
-                board[2][0].equals("X");
+        boolean xWinLeftDiagonal = board[0][0] == ('X') &&
+                board[1][1] == ('X') &&
+                board[2][2] == ('X');
 
-        // True if the indexes that are building horizontal lines left to right are "X"
-        boolean xWinHorizontal1 = board[0][0].equals("X") &&
-                board[0][1].equals("X") &&
-                board[0][2].equals("X");
+        boolean xWinRightDiagonal = board[0][2] == ('X') &&
+                board[1][1] == ('X') &&
+                board[2][0] == ('X');
 
-        boolean xWinHorizontal2 = board[1][0].equals("X") &&
-                board[1][1].equals("X") &&
-                board[1][2].equals("X");
+        // True if the indexes that are building horizontal lines left to right are "X'
+        boolean xWinHorizontal1 = board[0][0] == ('X') &&
+                board[0][1] == ('X') &&
+                board[0][2] == ('X');
 
-        boolean xWinHorizontal3 = board[2][0].equals("X") &&
-                board[2][1].equals("X") &&
-                board[2][2].equals("X");
+        boolean xWinHorizontal2 = board[1][0] == ('X') &&
+                board[1][1] == ('X') &&
+                board[1][2] == ('X');
+
+        boolean xWinHorizontal3 = board[2][0] == ('X') &&
+                board[2][1] == ('X') &&
+                board[2][2] == ('X');
 
         // True if the indexes that are building vertical lines top to bottom are "X"
-        boolean xWinVertical1 = board[0][0].equals("X") &&
-                board[1][0].equals("X") &&
-                board[2][0].equals("X");
+        boolean xWinVertical1 = board[0][0] == ('X') &&
+                board[1][0] == ('X') &&
+                board[2][0] == ('X');
 
-        boolean xWinVertical2 = board[0][1].equals("X") &&
-                board[1][1].equals("X") &&
-                board[2][1].equals("X");
+        boolean xWinVertical2 = board[0][1] == ('X') &&
+                board[1][1] == ('X') &&
+                board[2][1] == ('X');
 
-        boolean xWinVertical3 = board[0][2].equals("X") &&
-                board[1][2].equals("X") &&
-                board[2][2].equals("X");
+        boolean xWinVertical3 = board[0][2] == ('X') &&
+                board[1][2] == ('X') &&
+                board[2][2] == ('X');
 
 
         // >>> O win conditions <<<
 
         // True if the indexes that are building the diagonal line from top left to bottom right
         // or from top right to bottom left are "O"
-        boolean oWinLeftDiagonal = board[0][0].equals("O") &&
-                board[1][1].equals("O") &&
-                board[2][2].equals("O");
+        boolean oWinLeftDiagonal = board[0][0] == ('O') &&
+                board[1][1] == ('O') &&
+                board[2][2] == ('O');
 
-        boolean oWinRightDiagonal = board[0][2].equals("O") &&
-                board[1][1].equals("O") &&
-                board[2][0].equals("O");
+        boolean oWinRightDiagonal = board[0][2] == ('O') &&
+                board[1][1] == ('O') &&
+                board[2][0] == ('O');
 
         // True if the indexes that are building horizontal lines left to right are "O"
-        boolean oWinHorizontal1 = board[0][0].equals("O") &&
-                board[0][1].equals("O") &&
-                board[0][2].equals("O");
+        boolean oWinHorizontal1 = board[0][0] == ('O') &&
+                board[0][1] == ('O') &&
+                board[0][2] == ('O');
 
-        boolean oWinHorizontal2 = board[1][0].equals("O") &&
-                board[1][1].equals("O") &&
-                board[1][2].equals("O");
+        boolean oWinHorizontal2 = board[1][0] == ('O') &&
+                board[1][1] == ('O') &&
+                board[1][2] == ('O');
 
-        boolean oWinHorizontal3 = board[2][0].equals("O") &&
-                board[2][1].equals("O") &&
-                board[2][2].equals("O");
+        boolean oWinHorizontal3 = board[2][0] == ('O') &&
+                board[2][1] == ('O') &&
+                board[2][2] == ('O');
 
         // True if the indexes that are building vertical lines top to bottom are "O"
-        boolean oWinVertical1 = board[0][0].equals("O") &&
-                board[1][0].equals("O") &&
-                board[2][0].equals("O");
+        boolean oWinVertical1 = board[0][0] == ('O') &&
+                board[1][0] == ('O') &&
+                board[2][0] == ('O');
 
-        boolean oWinVertical2 = board[0][1].equals("O") &&
-                board[1][1].equals("O") &&
-                board[2][1].equals("O");
+        boolean oWinVertical2 = board[0][1] == ('O') &&
+                board[1][1] == ('O') &&
+                board[2][1] == ('O');
 
-        boolean oWinVertical3 = board[0][2].equals("O") &&
-                board[1][2].equals("O") &&
-                board[2][2].equals("O");
+        boolean oWinVertical3 = board[0][2] == ('O') &&
+                board[1][2] == ('O') &&
+                board[2][2] == ('O');
 
-        // --- Impossible conditions ---
 
-        // >>> Impossible horizontal <<<
-        boolean impossibleHorizontal = xWinHorizontal1 && oWinHorizontal2 ||
-                xWinHorizontal1 && oWinHorizontal3 ||
-                xWinHorizontal2 && oWinHorizontal3 ||
-                oWinHorizontal1 && xWinHorizontal2 ||
-                oWinHorizontal2 && xWinHorizontal3 ||
-                oWinHorizontal1 && xWinHorizontal3;
-
-        // >>> Impossible vertical <<<
-        boolean impossibleVertical = xWinVertical1 && oWinVertical2 ||
-                xWinVertical1 && oWinVertical3 ||
-                xWinVertical2 && oWinVertical3 ||
-                oWinVertical1 && xWinVertical2 ||
-                oWinVertical2 && xWinVertical3 ||
-                oWinVertical1 && xWinVertical3;
-
-        // >>> Impossible ratio <<<
-        int X = 0;
-        int O = 0;
-
-        for (String s : partsOfInput) {
-            if (s.equals("X")) {
-                X++;
-            } else if (s.equals("O")) {
-                O++;
-            }
-        }
-        // If you subtract X by O and the result is > 1 there are
-        // impossible/invalid moves. The Math.abs function is to
-        // "turn" a negative result of this calculation to a positive.
-        int ratioXtoO = Math.abs(X - O);
-
-        // --- Printer ---
-
-        // This part is printing the 3x3 board to the screen, also adds the lines around the board
-        System.out.println("---------"); // Top board line
-        for (String[] boardArrayString : board) {
-            System.out.print("| "); // Leading vertical bar
-            for (String boardString : boardArrayString) {
-                System.out.print(boardString + " ");
-            }
-            System.out.print("|" + '\n'); // Tailing vertical bar
-        }
-        System.out.println("---------"); // Lower board line
-
-        // Prints the actual status of the game
-
-        // Print when win combination's impossible
-        boolean impossible = ratioXtoO > 1 || impossibleHorizontal || impossibleVertical;
-        if (impossible) {
-            System.out.println("Impossible");
-        }
-        // Print wins for X or O
-        else if (xWinLeftDiagonal || xWinRightDiagonal ||
+        if (xWinLeftDiagonal || xWinRightDiagonal ||
                 xWinHorizontal1 || xWinHorizontal2 ||
                 xWinHorizontal3 || xWinVertical1 ||
                 xWinVertical2 || xWinVertical3) {
-            System.out.println("X wins");
-        } else if (oWinLeftDiagonal || oWinRightDiagonal ||
+
+            return 'X';
+        }
+
+        if (oWinLeftDiagonal || oWinRightDiagonal ||
                 oWinHorizontal1 || oWinHorizontal2 ||
                 oWinHorizontal3 || oWinVertical1 ||
                 oWinVertical2 || oWinVertical3) {
-            System.out.println("O wins");
+            return 'O';
         }
 
-        // Print draw
-        // Draw means the sum of X and O is equal to 9, also no other win condition applies
-        else if (X + O == 9) {
-            System.out.println("Draw");
+        // --- Draw condition ---
+        int X = 0;
+        int O = 0;
+
+        for (char[] c : board) {
+            for (char ch : c) {
+                if (ch == 'X') {
+                    X++;
+                } else if (ch == 'O') {
+                    O++;
+                }
+            }
+        }
+        if (X + O == 9) {
+            return 'd';
         }
 
-        // Print game not finished
-        else if (X + O < 9) {
-            System.out.println("Game not finished");
-        }
+        // --- Game goes on condition ---
+        return ' ';
+    }
+
+    public static void printWinner(String gameLoopWinner) {
+        System.out.println(gameLoopWinner);
     }
 }
